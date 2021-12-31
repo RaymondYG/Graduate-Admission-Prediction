@@ -5,7 +5,7 @@ body{
 .rolling_pictures{
     margin:10px;
 }
-p.welcome{
+ .welcome{
     position:absolute;
     color:rgb(226, 139, 25);
     font-weight: bold;
@@ -22,7 +22,7 @@ p.welcome{
     width: 300px;
 }
 
-div.introduction{
+.introduction{
     font-size:20px;
     font-weight:bold;
 }
@@ -33,7 +33,7 @@ div.introduction{
     text-transform: uppercase;
     background:transparent;
     color:#222;
-    letter-spacing: var(--spacing);
+    letter-spacing: 0.3px;
     display: inline-block;
     font-weight: 700;
     transition: all 0.3s linear;;

@@ -1,62 +1,87 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/predictstyle.css') }}" >
-    </head>
-    <body>
+{% extends "navigation.html" %}
+
+
+{% block head %}
+        <link rel="stylesheet" href="../static/styles/predictstyle.css" type= "text/css">
+        {% endblock %}
+{% block main %}
+        
         <div>
             <div class="bg bg-blur"></div>
             <div class="content content-front-1"><h1 class ="item">University Admission Prediction</h1></div>
             <div class="content content-front-2">
-                    <form action="/result" method="get">
-                    <p><span class = "item">Target Graduate School:</span>
+                    <form  method="post">
+                        {{ form.csrf_token }} 
+                    <p><br></p>
+                    <p>
+                        <div class="tooltip"> <img src="../static/styles/note_icon.png" alt='What it is' width="15" height="15" >
+                            <p class="tooltiptext" > Target graduate school selection. You can choose from the drop-down list.
+                            <br>So far, we only have the admission data from UCLA.But we will keep moving to get more data from more and more school. 
+                            <br>Please keep waiting. </p>
+                        </div>
+                        <span class = "item">Target Graduate School:</span>
                         <select name = "targetschool">
                             <option value = "UCLA">UCLA</option>
                         </select><br>
                     </p>
-                    <p><span class='item'>GRE: </span><input type="text" autocomplete="off" name="GRE" required placeholder="310" oninput="if(value>340)value=340;if(value<0)value=260"><br></p>
-                    <p><span class='item'>TOEFL: </span><input type="text" autocomplete="off" name='TOEFL' required placeholder="90" oninput="if(value>120)value=120;if(value<0)value=0"><br></p>
-                    <p><span class='item'>University Ranking From US News: </span>
-                        <select name = "university">
-                            <option value = "5">1-20</option> 
-                            <option value = "4">20-40</option>
-                            <option value = "3">40-60</option>
-                            <option value = "2">60-80</option>
-                            <option value = "1">>80</option>
-                        </select><br></p>
-                    <p><span class='item'>PS  Strength: </span>
-                        <select name = "ps">
-                            <option value = "5">Very Strong</option>
-                            <option value = "4">Strong</option>
-                            <option value = "3">Medium</option>
-                            <option value = "2">Not So Competitive</option>
-                            <option value = "1">Boring Paper Work</option>
-                        </select><br></p>
-                    <p><span class='item'>Recommendation Letter Strength: </span>
-                        <select name = "rl">
-                            <option value = "5">Very Strong</option>
-                            <option value = "4">Strong</option>
-                            <option value = "3">Medium</option>
-                            <option value = "2">Not So Competitive</option>
-                            <option value = "1">Boring Paper Work</option>
-                        </select><br></p>
-                    <p><span class='item' id='gpa'>CGPA: </span><input type="text" autocomplete="off" name="GPA" required placeholder="7" oninput="if(value>10)value=10;if(value<0)value=0"><br></p>
+                    <p>
+                        <div class="tooltip"> <img src="../styles/note_icon.png" alt='What it is' width="15" height="15" >
+                            <p class="tooltiptext" > Graduate Record Examination. 
+                                <br>For most of graduate schools and programs, it is a mandatory exam. 
+                                <br>For more details, please check on the official website of the program.
+                                <br>If you do not have one yet, you can leave it blank.   </p>
+                        </div>
+                        <span class='item'>{{ form.GRE.label }} </span>{{ form.GRE(style='width: 150px;') }}<br></p>
+                    <p>
+                        <div class="tooltip"> <img src="../styles/note_icon.png" alt='What it is' width="15" height="15" >
+                            <p class="tooltiptext" > TOEFL
+                                <br>It is a mandatory exam for foreign students. 
+                                <br>For more details, please check on the official website of the program.
+                                <br>If you do not have one yet, you can leave it blank.   </p>
+                        </div>
+                        <span class='item'>{{ form.TOEFL.label }} </span>{{ form.TOEFL(style='width: 150px;') }}<br></p>
+                    <p>
+                        <div class="tooltip"> <img src="../styles/note_icon.png" alt='What it is' width="15" height="15" >
+                            <p class="tooltiptext" > Undergraduate University ranking from US News. 
+                                <br>Please check on this website:
+                                <br> <a href="https://www.usnews.com/best-colleges/rankings/national-universities"><cite>US News University Ranking</cite></a> </p>
+                        </div>
+                        <span class='item'>{{ form.university_rank.label }} </span>{{ form.university_rank(style='width: 50px;') }}<br></p>
+                    <p>
+                        <div class="tooltip"> <img src="../styles/note_icon.png" alt='What it is' width="15" height="15" >
+                            <p class="tooltiptext" > The strength of your background.  </p>
+                        </div>
+                        <span class='item'>{{ form.personal_statement_strength.label }} </span>{{ form.personal_statement_strength(style='width: 50px;') }}<br></p>
+                        
+                    <p>
+                        <div class="tooltip"> <img src="../styles/note_icon.png" alt='What it is' width="15" height="15" >
+                        <p class="tooltiptext" > The strength of your Recommendation Letter.  </p>
+                        </div>
+                        <span class='item'>{{ form.recommendation_strength.label }} </span>{{ form.recommendation_strength(style='width: 50px;') }}<br></p>
+                        
+                    <p>
+                        <div class="tooltip"> <img src="../styles/note_icon.png" alt='What it is' width="15" height="15" >
+                            <p class="tooltiptext" > Cumulative GPA of total 4-undergraduate years with 10.0 as full score. 
+                                <br>If not a senior, forecast results cannot be guaranteed validity. 
+                                 </p>
+                        </div>
+                        <span class='item'>{{ form.GPA.label }} </span>{{ form.GPA(style='width: 150px;') }}<br></p>
                    
                     
                     
-                    <p><span class='item'>Research Experience: </span>
-                    <select name = "research_experience">
-                        <option value = "Yes">Yes</option>
-                        <option value = "No">No</option>
-                    </select><br></p>
-                            
-                    <input class="btn btn-hero" type="submit" name="submit" value="Predict">
+                    <p>
+                        <div class="tooltip"> <img src="../styles/note_icon.png" alt='What it is' width="15" height="15" >
+                            <p class="tooltiptext" > Including research and papers cooperating with professor or other students. 
+                                 </p>
+                        </div>
+                        
+                        <span class='item'>{{ form.research_original.label }} </span>{{ form.research_original(style='width: 50px;') }}<br></p>
+                    {{ form.submit(class="btn btn-hero") }}
+                    
                     </form>
 
             </div>
         </div>
-           
-    </body>
     
-    
-</html>
+        
+        {% endblock %}

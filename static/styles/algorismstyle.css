@@ -1,0 +1,39 @@
+#big-box {
+    display: block;
+    width: 650px;
+    height: 400px;
+    margin: auto;
+}
+
+#header {
+    padding: auto;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#left {
+    border: 1px solid blue;
+    margin-left: 10px;
+    height: 250px;
+    width: 175px;
+    float: left;
+}
+
+#main{
+    border: 1px solid blue;
+    height: 250px;
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#right {
+    border: 1px solid blue;
+    margin-right: 10px;
+    margin-top: -250px;
+    height: 250px;
+    width: 175px;
+    float: right;
+}
+    

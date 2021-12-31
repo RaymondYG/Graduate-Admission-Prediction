@@ -1,11 +1,28 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for,session
 import pickle
 from model import model
 import numpy as np
+from wtforms import StringField, PasswordField, BooleanField, SubmitField,IntegerField,FloatField,SelectField
+from wtforms.validators import DataRequired, InputRequired, Length, NumberRange
+from flask_wtf import FlaskForm
+
 
 app = Flask(__name__)
 # We need to save the result elsewhere, cannot send the result directly to the route.
 chance_of_admit = 0
+
+app.secret_key = 'secret string'
+
+class LoginForm(FlaskForm):
+       GRE = IntegerField('GRE', validators=[InputRequired(),NumberRange(min=280,max=340,message="Input is not a valid score")],render_kw={'placeholder': '300'})
+       TOEFL = IntegerField('TOEFL', validators=[InputRequired(),NumberRange(min=0,max=120,message="Input is not a valid score")],render_kw={'placeholder': '100'})
+       university_rank = SelectField('University Ranking From US News',choices=[('5','1-20'),('4','20-40'),('3','40-60'),('2','60-80'),('1','>80')])
+       personal_statement_strength =  SelectField('PS Strength',choices=[(5,'Very Strong'),(4,'Strong'),(3,'Medium'),(2,'Not So Competitive'),(1,'Boring Paper Work')])
+       recommendation_strength =  SelectField('Recommendation Letter Strength',choices=[(5,'Very Strong'),(4,'Strong'),(3,'Medium'),(2,'Not So Competitive'),(1,'Boring Paper Work')])
+       GPA = FloatField(label="CGPA",validators=[InputRequired(),NumberRange(min=0,max=10.0,message="Input is not a valid score")],render_kw={'placeholder': '7'})
+       research_original=SelectField('Recommendation Letter Strength',choices=[(1,'Yes'),(0,'No')])
+       submit = SubmitField('Prediction')
+       
 
 @app.route('/',methods = ['GET','POST'])
 @app.route('/index', methods = ['GET','POST'])
@@ -15,36 +32,51 @@ def index():
     return render_template('index.html')
 
 @app.route('/predict',methods=['GET','POST'])
-def predict():
-    if request.method == 'POST':
-        return redirect(url_for('index'))
-    else:
-        return render_template('predict.html')
+def predict():    
+    #if request.method == 'POST':
+    #    return redirect(url_for('index'))
+    
+    form = LoginForm()
+    if form.validate_on_submit():
+        session.clear
+        session['GPA']=form.GPA.data
+        session['TOEFL']=form.TOEFL.data
+        session['GRE']=form.GRE.data
+        session['university_rank']=int(form.university_rank.data)
+        session['personal_statement_strength'] = int(form.personal_statement_strength.data)
+        session['recommendation_strength']=int(form.recommendation_strength.data)
+        research_original=int(form.research_original.data)
+        research=-1
+        if research_original==1:
+            research=1
+        else:
+            research=0
+        session['research']=research
+        return redirect(url_for('result'))
+    return(render_template('predict.html', form=form))
+        
+        
 
 
 @app.route('/result',methods = ['GET','POST'])
 def result():
     # Push the back button
-    if request.method == 'POST':
-        return redirect(url_for('index'))
-    else:
+    #if request.method == 'POST':
+    #    return redirect(url_for('index'))
+    
+    if request.method !='POST':
         #Get parameter from user input
-        GPA=float(request.values['GPA']) 
-        TOEFL=int(request.values['TOEFL']) 
-        GRE=int(request.values['GRE']) 
-        university_rank=int(request.values['university'])
-        personal_statement_strength = int(request.values['ps'])
-        recommendation_strength=int(request.values['rl'])
-        research_original=request.values['research_experience']
-        research=-1
-        if research_original=='Yes':
-            research=1
-        else:
-            research=0
-        
+        GPA=session.get('GPA')
+        TOEFL=session.get('TOEFL')
+        GRE=session.get('GRE') 
+        university_rank=session.get('university_rank')
+        personal_statement_strength = session.get('personal_statement_strength')
+        recommendation_strength=session.get('recommendation_strength')
+        research=session.get('research')
         chances = ""
         predict_features = np.array([GRE,TOEFL,university_rank,personal_statement_strength,recommendation_strength,GPA,research]).reshape(1,-1)
         chance_of_admit = ChoosingProcess(predict_features)
+        print(predict_features)
         print(chance_of_admit==3)
         if chance_of_admit == 3:
             chances += "Highly"
@@ -76,11 +108,9 @@ def result():
             RecommendationAdvice = 1
             # RecommendationAdvice['head'] = "The Strength of Letter of Recommendation:"
             # RecommendationAdvice['main'] = " Your Recommendation letter is not strong enough to persuade the school to admit you. You may persuade your professor to rewrite the letter with more words of praises, or try to find another professor. "
-      
-
         return render_template('result.html', chances = chances, TOEFL = TOEFL, SOP = personal_statement_strength, RS = research, RM=recommendation_strength, TOEFLAdvice = TOEFLAdvice, SOPAdvice = SOPAdvice, ResearchAdvice= ResearchAdvice,RecommendationAdvice=RecommendationAdvice)
-
-
+        
+    return render_template('result.html')
 def ChoosingProcess(predict_features):
         #Predict the probability of admit
         

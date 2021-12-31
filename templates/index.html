@@ -1,22 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends "navigation.html" %}
+
+
+{% block head %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainstyle.css') }}" >
+    <link rel="stylesheet" type= "text/css" href= "../static/styles/mainstyle.css" >
     <!-- <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mainstyle.css') }}" > -->
     <title>Document</title>
-</head>
-<body>
+    {% endblock %}
+    {% block main %}
     <div>
         <div class="rolling_pictures">
             <marquee behavior="alternate" contenteditable="true" onMouseOut="this.start()" onMouseOver="this.stop()"> 
-                <img src="{{ url_for('static',filename='styles/school1.png') }}" width="550" height="320" alt="School 1">
-                <img src="{{ url_for('static',filename='styles/school2.png') }}" width="550" height="320" alt="School 2">
-                <img src="{{ url_for('static',filename='styles/school3.png') }}" width="550" height="320" alt="School 3">
-                <img src="{{ url_for('static',filename='styles/school4.png') }}" width="550" height="320" alt="School 4">
-                <img src="{{ url_for('static',filename='styles/school5.png') }}" width="550" height="320" alt="School 5">
+                <img src="../static/styles/school1.png" width="550" height="320" alt="School 1">
+                <img src="../static/styles/school2.png" width="550" height="320" alt="School 2">
+                <img src="../static/styles/school3.png" width="550" height="320" alt="School 3">
+                <img src="../static/styles/school4.png" width="550" height="320" alt="School 4">
+                <img src="../static/styles/school5.png" width="550" height="320" alt="School 5">
                 </marquee>
             <p class="welcome">Welcome to the upcoming graduate student!<p>
         </div>
@@ -50,6 +51,4 @@
            </p>
     </div>
     
-    
-</body>
-</html>
+    {% endblock %}

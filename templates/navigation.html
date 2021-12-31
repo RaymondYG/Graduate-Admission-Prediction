@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  {% block head %}
+  {% endblock %}
+<style>
+  
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(226, 139, 25);
+}
+
+tit {
+  float:left;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  text-align: center;
+  padding-top: 0.65em;
+  padding-left: 1em;
+  font-size: 25px;
+  text-decoration: none;
+}
+
+li {
+  float: right;
+  font-family: 'Roboto', sans-serif;
+}
+
+li a {
+  display: block;
+  color: whitesmoke;
+  text-align: center;
+  padding: 20px 25px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    color: white;
+    text-decoration: underline;
+}
+
+.active {
+    color: white;
+    background-color: #fa7e23;
+    text-decoration: underline;
+}
+
+
+footer {
+  margin-top: 10px;
+  text-align: center;
+  padding: 3px;
+  background-color: snow;
+}
+
+</style>
+</head>
+<body>
+  <header>
+    <nav>
+    <ul>
+      <tit>Graduate Admission Predect</tit>
+
+      {% if url_for(request.endpoint) == "/index" %}     
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#algorism">Alogorism</a></li>
+      <li><a href="{{url_for('predict')}}">Prediction</a></li>
+      <li><a class="active" href="{{url_for('index')}}">Home</a></li>
+
+      {% elif url_for(request.endpoint) == "/predict" %}     
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#algorism">Alogorism</a></li>
+      <li><a class="active" href="{{url_for('predict')}}">Prediction</a></li>
+      <li><a href="{{url_for('index')}}">Home</a></li>
+
+      {% elif url_for(request.endpoint) == "/algorism" %}     
+      <li><a href="#about">About Us</a></li>
+      <li><a class="active" href="#algorism.html">Alogorism</a></li>
+      <li><a href="{{url_for('predict')}}">Prediction</a></li>
+      <li><a href="{{url_for('index')}}">Home</a></li>
+
+      {% elif url_for(request.endpoint) == "/about" %}     
+      <li><a class="active" href="#about.html">About Us</a></li>
+      <li><a href="#algorism">Alogorism</a></li>
+      <li><a href="{{url_for('predict')}}">Prediction</a></li>
+      <li><a href="{{url_for('index')}}">Home</a></li>
+
+      {% endif %}
+    </ul>
+    </nav>
+  </header>
+  <main>
+  {% block main %}
+    {% endblock %}
+  </main>
+<footer>
+  <p><img src="../static/styles/jhu_logo_icon.png" width="20" height="20"> <a>Author: </a>
+    <a href="https://www.linkedin.com/in/yuguang-sun-jhuedu118/"><cite>Yuguang Sun</cite></a>
+  </p>
+</footer>
+
+</body>
+</html>
+
+

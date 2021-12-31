@@ -1,6 +1,6 @@
 .bg{
     background: url('peabody.jpg');
-    height: 630px;
+    height: 660px;
     text-align: center;
     line-height:700px;
 }
@@ -21,7 +21,6 @@
     font-family:"Open Sans", sans-serif;
     font-size:32px;
     color:hsl(21, 23%, 73%);
-    position:absolute;
     top: 10%;
     left: 50%;
     width: 80%;
@@ -66,4 +65,34 @@
     color: #fff;
     background: #222;
 }
+.tooltip {
+    position: relative;
+    display: inline-block;
+    
+}
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 400px;
+    background-color: rgb(160, 158, 158); 
+    color: #fff;
+    text-align:left;
+    
+    padding: 10px ;
+    border-radius: 6px;
+    font-size:small;
+    /* 定位 */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
 
+
+footer {
+    margin-top: 10px;
+    text-align:center;
+    font-size:small;
+}

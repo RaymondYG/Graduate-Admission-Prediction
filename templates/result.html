@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/resultstyle.css')}}" > -->
+        <style>
+            
+            @media(min-width:568px) {
+                .end {
+                    margin-left: auto
+                }
+            }
+
+            @media(max-width:768px) {
+                #post {
+                    width: 100%
+                }
+            }
+
+            #clicked {
+                padding-top: 1px;
+                padding-bottom: 1px;
+                text-align: center;
+                width: 100%;
+                background-color: #ecb21f;
+                border-color: #a88734 #9c7e31 #846a29;
+                color: black;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 13px
+            }
+
+            #profile {
+                background-color: unset
+            }
+
+            #post {
+                margin: 10px;
+                padding: 6px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                text-align: center;
+                background-color: #ecb21f;
+                border-color: #a88734 #9c7e31 #846a29;
+                color: black;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 13px;
+                width: 50%
+            }
+
+            body {
+                background-color: black
+            }
+
+            #nav-items li a,
+            #profile {
+                text-decoration: none;
+                color: rgb(224, 219, 219);
+                background-color: black
+            }
+
+            .comments {
+                margin-top: 5%;
+                margin-left: 20px
+            }
+
+            .darker {
+                border: 1px solid #ecb21f;
+                background-color: black;
+                float: right;
+                border-radius: 5px;
+                padding-left: 40px;
+                padding-right: 30px;
+                padding-top: 10px
+            }
+
+            .comment {
+                border: 1px solid rgba(16, 46, 46, 1);
+                background-color: rgba(16, 46, 46, 0.973);
+                float: left;
+                border-radius: 5px;
+                padding-left: 40px;
+                padding-right: 30px;
+                padding-top: 10px
+            }
+
+            .comment h4,
+            .comment span,
+            .darker h4,
+            .darker span {
+                display: inline
+            }
+
+            .comment p,
+            .comment span,
+            .darker p,
+            .darker span {
+                color: rgb(184, 183, 183)
+            }
+
+            h1{
+                text-align: center;
+                color: white;
+                font-weight: bold
+            }
+            h4 {
+                color: white;
+                font-weight: bold
+            }
+
+            label {
+                color: rgb(212, 208, 208)
+            }
+
+            #align-form {
+                margin-top: 20px
+            }
+
+            .form-group p a {
+                color: white
+            }
+
+            #checkbx {
+                background-color: black
+            }
+
+            #darker img {
+                margin-right: 15px;
+                position: static
+            }
+
+            .form-group input,
+            .form-group textarea {
+                background-color: black;
+                border: 1px solid rgba(16, 46, 46, 1);
+                border-radius: 12px
+            }
+
+            form {
+                border: 1px solid rgba(16, 46, 46, 1);
+                background-color: rgba(16, 46, 46, 0.973);
+                border-radius: 5px;
+                padding: 20px
+            }
+            
+            .btn{
+                text-align: center;
+                position:absolute;
+                top: 50px;
+                left:30px;
+            }
+            .btn-hero{
+                font-family: "Roboto", sans-serif;
+                text-transform: uppercase;
+                background:transparent;
+                color:#fff;
+                letter-spacing: var(--spacing);
+                display: inline-block;
+                font-weight: 700;
+                transition: all 0.3s linear;;
+                border: 2px solid #ecb21f;
+                cursor: pointer;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+                border-radius: 0.25rem;
+                font-size: 1rem;
+                padding: 0.75rem 1.25rem;
+            }
+            .btn-hero:hover{
+                color: #fff;
+                background: #846a29;
+            }
+
+   
+
+        </style>
+    </head>
+    <body>
+    
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 col-md-6 col-12 pb-4">
+                    <h1> According to your historical performance, 
+                        your admission chances of being selected by UCLA is <br>
+                        <b style ="color: #ecb21f">{{chances}}</b>. <br>
+                        Everyone can see your efforts, and please keep working hard.<br>
+                        If you want to continue improving competitiveness, based on our analysis, we have some personalized advices for you:         </h1>
+                    <div class="comment mt-4 text-justify float-left" id = "toefladvice"> 
+                        <h4>TOEFL:</h4> <span>{{TOEFL}} </span> <br>
+                        <p >Your TOEFL score is lower than the average in recent years. Please note that although this score does not represent your academic level, it will affect your level of adaptation to the English academic environment in the future. If you still have time, please register for a TOEFL test and prepare carefully. Following are some websites that may help you:
+                        <br>
+                        To register: https://www.ets.org/toefl
+                        <br>
+                        To tips and mock exam: https://www.ets.org/s/toefl/free-practice/start.html
+                        </p>
+                    </div>
+
+                    <div class="text-justify darker mt-4 float-right" id="sopadvice"> 
+                        <h4>The Strength of SOP:</h4> <span>{{SOP}}</span> <br>
+                        <p>Your SOP is not strong enough to persuade the school to admit you. Also, you may exaggerate the strengthyour SOP, hence we strongly recommend you have a consultation in the school’s guidance center or online. Here are some websites of tips and online consultants that may help you.
+                            <br>
+                            To improve: https://www.harvardsqessays.com/essay-editing/college/
+                            <br>
+                            To check grammar: https://www.grammarly.com/
+                        </p>
+                    </div>
+                    <div class="comment mt-4 text-justify" id="researchadvice"> 
+                        <h4>Research Opportunity:</h4> <span>{{RS}}</span> <br>
+                        <p>If you have ever had a research opportunity, it will greatly increase your competitiveness among other students. Research opportunity includes individual academic working, working with any professor or even final project of classes. If you still cannot find any project, we have some useful websites for you: 
+                            <br>
+                            For data analysis project:https://www.kaggle.com/
+                            <br>
+                            For where to find project: https://www.quora.com/
+                        </p>
+                    </div>
+                    <div class="darker mt-4 text-justify" id="recommendationadvice"> 
+                        <h4>The Strength of Letter of Recommendation:</h4> <span>{{RM}}</span> <br>
+                        <p>Your Recommendation letter is not strong enough to persuade the school to admit you. You may persuade your professor to rewrite the letter with more words of praises, or try to find another professor.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <div id="TOEFLsave">{{TOEFLAdvice}}</div>
+    <div id="SOPsave">{{SOPAdvice}}</div>
+    <div id="Researchsave">{{ResearchAdvice}}</div>
+    <div id="Recommendationsave">{{RecommendationAdvice}}</div>
+    <div> <form method="post"><input class="btn btn-hero" type="submit" name="submit" value="Back"></form>
+    </div>
+
+
+    <script>
+        var toefladvice = document.getElementById("TOEFLsave").innerText
+        var SOPadvice = document.getElementById("SOPsave").innerText
+        var Researchadvice = document.getElementById("Researchsave").innerText
+        var Recommendationadvice = document.getElementById("Recommendationsave").innerText
+        if(toefladvice != "1")
+        {
+            document.getElementById("toefladvice").style.visibility="hidden";
+        }
+        if(SOPadvice != "1")
+        {
+            document.getElementById("sopadvice").style.visibility="hidden";
+        }
+        if(Researchadvice != "1")
+        {
+            document.getElementById("researchadvice").style.visibility="hidden";
+        }
+        if(Recommendationadvice != "1")
+        {
+            document.getElementById("recommendationadvice").style.visibility="hidden";
+        }
+        
+            
+     </script>
+</body>
+</html>
+

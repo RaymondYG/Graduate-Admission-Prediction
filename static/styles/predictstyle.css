@@ -1,0 +1,98 @@
+.bg{
+    background: url('peabody.jpg');
+    height: 660px;
+    text-align: center;
+    line-height:700px;
+}
+.bg-blur{
+    float: left;
+    width: 100%;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    -webkit-filter:blur(4px);
+    -moz-filter:blur(4px);
+    -o-filter:blur(4px);
+    -ms-filter:blur(4px);
+    filter:blur(4px);
+}
+
+.content-front-1{
+    font-family:"Open Sans", sans-serif;
+    font-size:32px;
+    color:hsl(21, 23%, 73%);
+    top: 10%;
+    left: 50%;
+    width: 80%;
+    transform:translate(-50%,-50%);
+    z-index:2;
+    text-align:center;
+}
+
+.content-front-2{
+    background-color: rgba(255,255,255,0.2);
+    font-size: 25px;
+    font-weight: bold;
+    color:hsl(0, 0%, 0%);
+    opacity: 30;
+    font-family: "Open Sans", sans-serif;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    transform:translate(-50%,-50%);
+    z-index:2;
+    text-align:center;
+}
+
+.btn-hero{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background:transparent;
+    color:#222;
+    letter-spacing: var(--spacing);
+    display: inline-block;
+    font-weight: 700;
+    transition: all 0.3s linear;;
+    border: 2px solid #222;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+}
+.btn-hero:hover{
+    color: #fff;
+    background: #222;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    
+}
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 400px;
+    background-color: rgb(160, 158, 158); 
+    color: #fff;
+    text-align:left;
+    
+    padding: 10px ;
+    border-radius: 6px;
+    font-size:small;
+    /* 定位 */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+
+footer {
+    margin-top: 10px;
+    text-align:center;
+    font-size:small;
+}

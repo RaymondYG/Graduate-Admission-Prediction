@@ -1,0 +1,50 @@
+body{
+    text-align:center;
+}
+
+.rolling_pictures{
+    margin:10px;
+}
+ .welcome{
+    position:absolute;
+    color:rgb(226, 139, 25);
+    font-weight: bold;
+    font-size:45px;
+    top: 130px;
+    left: 280px;
+}
+
+.details{
+    position:absolute;
+    font-weight: bold;
+    right:10px;
+    bottom:50px;
+    width: 300px;
+}
+
+.introduction{
+    font-size:20px;
+    font-weight:bold;
+}
+
+
+.btn-hero{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    background:transparent;
+    color:#222;
+    letter-spacing: 0.3px;
+    display: inline-block;
+    font-weight: 700;
+    transition: all 0.3s linear;;
+    border: 2px solid #222;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
+}
+.btn-hero:hover{
+    color: #fff;
+    background: #222;
+}

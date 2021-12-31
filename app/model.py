@@ -36,8 +36,8 @@ if __name__ == '__main__':
 
 
 
-    Scale = pickle.load(open("scale", "rb"))
-    Model = pickle.load(open("model", "rb"))
+    Scale = pickle.load(open("prediction/app/scale", "rb"))
+    Model = pickle.load(open("prediction/app/model", "rb"))
     test1 = np.array([290,100,1,1,2,7.56,0])
     print(Model.predict(Scale.transform(test1.reshape(1,-1))))
     # Result will be 2

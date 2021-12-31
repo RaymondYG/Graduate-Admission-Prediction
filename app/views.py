@@ -1,33 +1,20 @@
+# -*- coding: utf-8 -*-
 from flask import Flask, request, render_template, redirect, url_for,session
 import pickle
-from model import model
+from app.model import model
 import numpy as np
 import pandas as pd
 from wtforms import StringField, PasswordField, BooleanField, SubmitField,IntegerField,FloatField,SelectField
 from wtforms.validators import DataRequired, InputRequired, Length, NumberRange
 from flask_wtf import FlaskForm
-
-
-app = Flask(__name__)
-# We need to save the result elsewhere, cannot send the result directly to the route.
-chance_of_admit = 0
-
-app.secret_key = 'secret string'
-
-class LoginForm(FlaskForm):
-       GRE = IntegerField('GRE', validators=[InputRequired(),NumberRange(min=280,max=340,message="Input is not a valid score")],render_kw={'placeholder': '300'})
-       TOEFL = IntegerField('TOEFL', validators=[InputRequired(),NumberRange(min=0,max=120,message="Input is not a valid score")],render_kw={'placeholder': '100'})
-       university_rank = SelectField('University Ranking From US News',choices=[('5','1-20'),('4','20-40'),('3','40-60'),('2','60-80'),('1','>80')])
-       personal_statement_strength =  SelectField('PS Strength',choices=[(5,'Very Strong'),(4,'Strong'),(3,'Medium'),(2,'Not So Competitive'),(1,'Boring Paper Work')])
-       recommendation_strength =  SelectField('Recommendation Letter Strength',choices=[(5,'Very Strong'),(4,'Strong'),(3,'Medium'),(2,'Not So Competitive'),(1,'Boring Paper Work')])
-       GPA = FloatField(label="CGPA",validators=[InputRequired(),NumberRange(min=0,max=10.0,message="Input is not a valid score")],render_kw={'placeholder': '7'})
-       research_original=SelectField('Recommendation Letter Strength',choices=[(1,'Yes'),(0,'No')])
-       submit = SubmitField('Prediction')
-       
+from app import app
+from app.forms import LoginForm
 
 @app.route('/',methods = ['GET','POST'])
 @app.route('/index', methods = ['GET','POST'])
 def index():
+    
+
     if request.method == 'POST':
         return redirect(url_for('predict'))
     return render_template('index.html')
@@ -121,6 +108,3 @@ def ChoosingProcess(predict_features):
         chance_of_admit = model1.predict(predict_features.reshape(1,-1))
         
         return int(chance_of_admit[0])
-                 
-if __name__ == '__main__':
-    app.run(port=8080, debug=True)

@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for,session
 import pickle
 from model import model
 import numpy as np
+import pandas as pd
 from wtforms import StringField, PasswordField, BooleanField, SubmitField,IntegerField,FloatField,SelectField
 from wtforms.validators import DataRequired, InputRequired, Length, NumberRange
 from flask_wtf import FlaskForm

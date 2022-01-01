@@ -25,7 +25,7 @@ def predict():
     #    return redirect(url_for('index'))
     
     form = LoginForm()
-    if form.validate_on_submit():
+    if request.method =='POST':
         session.clear
         session['GPA']=form.GPA.data
         session['TOEFL']=form.TOEFL.data
@@ -63,6 +63,8 @@ def result():
         research=session.get('research')
         chances = ""
         predict_features = np.array([GRE,TOEFL,university_rank,personal_statement_strength,recommendation_strength,GPA,research]).reshape(1,-1)
+        print(predict_features)
+        #return render_template('result.html',prediction=predict_features)
         chance_of_admit = ChoosingProcess(predict_features)
         print(predict_features)
         print(chance_of_admit==3)

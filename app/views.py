@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Flask, request, render_template, redirect, url_for,session
+from flask import Flask, request, render_template, redirect, url_for,session,flash
 import pickle
 from app.model import model
 import numpy as np
@@ -40,6 +40,7 @@ def predict():
         else:
             research=0
         session['research']=research
+        
         return redirect(url_for('result'))
     return(render_template('predict.html', form=form))
         

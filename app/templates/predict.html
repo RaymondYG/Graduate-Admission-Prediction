@@ -9,7 +9,7 @@
         
         <div>
             <div class="bg bg-blur"></div>
-            <div class="content content-front-1"><h1 class ="item">University Admission Prediction</h1></div>
+            <!--<div class="content content-front-1"><h1 class ="item">University Admission Prediction</h1></div> -->
             <div class="content content-front-2">
                     <form  method="post">
                         {{ form.csrf_token }} 
@@ -47,18 +47,18 @@
                                 <br>Please check on this website:
                                 <br> <a href="https://www.usnews.com/best-colleges/rankings/national-universities"><cite>US News University Ranking</cite></a> </p>
                         </div>
-                        <span class='item'>{{ form.university_rank.label }} </span>{{ form.university_rank(style='width: 50px;') }}<br></p>
+                        <span class='item'>{{ form.university_rank.label }} </span>{{ form.university_rank }}<br></p>
                     <p>
                         <div class="tooltip"> <img src="../styles/note_icon.png" alt='What it is' width="15" height="15" >
                             <p class="tooltiptext" > The strength of your background.  </p>
                         </div>
-                        <span class='item'>{{ form.personal_statement_strength.label }} </span>{{ form.personal_statement_strength(style='width: 50px;') }}<br></p>
+                        <span class='item'>{{ form.personal_statement_strength.label }} </span>{{ form.personal_statement_strength }}<br></p>
                         
                     <p>
                         <div class="tooltip"> <img src="../styles/note_icon.png" alt='What it is' width="15" height="15" >
                         <p class="tooltiptext" > The strength of your Recommendation Letter.  </p>
                         </div>
-                        <span class='item'>{{ form.recommendation_strength.label }} </span>{{ form.recommendation_strength(style='width: 50px;') }}<br></p>
+                        <span class='item'>{{ form.recommendation_strength.label }} </span>{{ form.recommendation_strength }}<br></p>
                         
                     <p>
                         <div class="tooltip"> <img src="../styles/note_icon.png" alt='What it is' width="15" height="15" >
@@ -76,8 +76,10 @@
                                  </p>
                         </div>
                         
-                        <span class='item'>{{ form.research_original.label }} </span>{{ form.research_original(style='width: 50px;') }}<br></p>
-                    {{ form.submit(class="btn btn-hero") }}
+                        <span class='item'>{{ form.research_original.label }} </span>{{ form.research_original }}<br></p>
+                        
+                        
+                        {{ form.submit(class="btn btn-primary btn-lg") }}
                     
                     </form>
 

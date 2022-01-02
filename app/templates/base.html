@@ -31,7 +31,7 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
         
-        {% if url_for(request.endpoint) == "/index" %} 
+        {% if url_for(request.endpoint) == "/index" or url_for(request.endpoint) == "/"%} 
         <li><a href="{{url_for('index')}}" id="active"> Home </a></li>
         <li><a href="{{url_for('predict')}}"> Prediction </a></li>
         <li><a href="{{url_for('algorism')}}"> Alogorism </a></li>

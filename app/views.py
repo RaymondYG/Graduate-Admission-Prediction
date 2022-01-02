@@ -110,3 +110,6 @@ def ChoosingProcess(predict_features):
         chance_of_admit = model1.predict(predict_features.reshape(1,-1))
         
         return int(chance_of_admit[0])
+@app.route('/algorism',methods=['GET','POST'])
+def algorism():  
+    return  render_template('algorism.html')

@@ -30,15 +30,25 @@
       <p class="text-center">再牛逼的梦想,也抵不住你傻逼似的坚持！</p>
     </div>
     <div class="col-sm-4">
-      <img src="../static/styles/classification.png" class="img-responsive" alt="processing data" width="360" height="236">
+      <img src="{{ url_for('static', filename='pics/classification.png') }}" class="img-responsive" alt="processing data" width="360" height="236">
       <h3 class="text-center">第三列</h3>        
       <p class="text-center">学的不仅是技术，更是梦想！</p>
       <p class="text-center">再牛逼的梦想,也抵不住你傻逼似的坚持！</p>
     </div>
   </div>
+  <>
+  <div class="row">
+    <div class="col-sm-6">
+      <img src="{{ url_for('static', filename='pics/barplot.png') }}" class="img-responsive">
+    </div>
+    <div class="col-sm-6">
+      <h1> </h1>
+      <p> The bar plot shows the <strong><em>relative</em></strong> importance of each factor which come from the average result of multiple mathematical models training by available data. </p>
+      <p> Except the University Ranking, which cannot be changed, we highly recommend candidates to increase TOEFL, SOP and Research opportunity first. These three aspects are equally important for applying to graduate school. </p>
+      <p> The strange thing happens at GRE and GPA. Graduate school seems paying less attention on those two aspects. According to our data, we assume the reason is that those two aspects of all of the candidates are nearly the same. School cannot distinguish candidates by those two aspects. So, instead of improving those two aspects, keep it on an average level and improve other aspects could be a more reasonable and effective method for increasing the chance of admit. </p>
+    </div>
+  </div>
 </div>
 
-<div>
-  <img src="{{ url_for('static/pics', filename='barplot.jng') }}>
-</div>
+
 {% endblock %}
